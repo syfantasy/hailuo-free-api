@@ -17,7 +17,7 @@ const MODEL_NAME = "hailuo";
 // 角色ID
 const CHARACTER_ID = "1";
 // 最大重试次数
-const MAX_RETRY_COUNT = 3;
+const MAX_RETRY_COUNT = 1;
 // 重试延迟
 const RETRY_DELAY = 5000;
 
@@ -69,7 +69,7 @@ async function createSpeech(
       audioUrls = [];
     let startTime = Date.now();
     while (requestStatus < 2) {
-      if (Date.now() - startTime > 30000) throw new Error("语音生成超时");
+      if (Date.now() - startTime > 60000) throw new Error("语音生成超时");
       const result = await core.request(
         "GET",
         `/v1/api/chat/msg_tts?msgID=${messageId}&timbre=${voice}`,
